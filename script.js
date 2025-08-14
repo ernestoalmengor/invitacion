@@ -10,27 +10,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (distancia <= 0) {
       countdownEl.innerHTML = `
-                <div class="contador-item"><span>0</span><small>Días</small></div>
-                <div class="contador-item"><span>0</span><small>Horas</small></div>
-                <div class="contador-item"><span>0</span><small>Minutos</small></div>
-                <div class="contador-item"><span>0</span><small>Segundos</small></div>
-            `;
+        <div class="contador-item"><span>0</span><small>Días</small></div>
+        <div class="contador-item"><span>0</span><small>Horas</small></div>
+        <div class="contador-item"><span>0</span><small>Minutos</small></div>
+        <div class="contador-item"><span>0</span><small>Segundos</small></div>
+      `;
       return;
     }
 
     const dias = Math.floor(distancia / (1000 * 60 * 60 * 24));
-    const horas = Math.floor(
-      (distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-    );
+    const horas = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutos = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
     const segundos = Math.floor((distancia % (1000 * 60)) / 1000);
 
     countdownEl.innerHTML = `
-            <div class="contador-item"><span>${dias}</span><small>Días</small></div>
-            <div class="contador-item"><span>${horas}</span><small>Horas</small></div>
-            <div class="contador-item"><span>${minutos}</span><small>Minutos</small></div>
-            <div class="contador-item"><span>${segundos}</span><small>Segundos</small></div>
-        `;
+        <div class="contador-item"><span>${dias}</span><small>Días</small></div>
+        <div class="contador-item"><span>${horas}</span><small>Horas</small></div>
+        <div class="contador-item"><span>${minutos}</span><small>Minutos</small></div>
+        <div class="contador-item"><span>${segundos}</span><small>Segundos</small></div>
+      `;
   }
 
   actualizarContador();
@@ -42,17 +40,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const playerLabel = document.getElementById("playerLabel");
   const overlay = document.getElementById("overlayEntrada");
   const btnEntrar = document.getElementById("btnEntrar");
+  const body = document.body;
 
   function setPlayerState(sonando) {
     playerLabel.textContent = sonando ? "Sonando…" : "Silencio";
-    playerBtn.querySelector("i").className = sonando
-      ? "fa-solid fa-music"
-      : "fa-solid fa-pause";
+    playerBtn.querySelector("i").className = sonando ? "fa-solid fa-music" : "fa-solid fa-pause";
     playerBtn.setAttribute("aria-pressed", sonando ? "true" : "false");
   }
 
   // Nueva función para manejar la entrada y la reproducción de música
   function handleEntry() {
+    // Elimina la clase para permitir el scroll
+    body.classList.remove('no-scroll');
     // Oculta el overlay
     overlay.classList.add("oculto");
     setTimeout(() => (overlay.style.display = "none"), 550);
@@ -69,7 +68,8 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   }
 
-  // Evento para el botón de entrada del overlay
+  // Al cargar la página, añade la clase para deshabilitar el scroll
+  body.classList.add('no-scroll');
   btnEntrar.addEventListener("click", handleEntry);
 
   // Botón flotante Play/Pause
@@ -92,37 +92,36 @@ document.addEventListener("DOMContentLoaded", () => {
       audio.pause();
     }
   });
-// === CARRUSEL DE FOTOS ===
-const carrusel = document.querySelector(".carrusel-fotos");
-const prevBtn = document.querySelector(".carrusel-btn.prev");
-const nextBtn = document.querySelector(".carrusel-btn.next");
 
-if (carrusel && prevBtn && nextBtn) {
-    let scrollPosition = 0;
-    const scrollWidth = carrusel.scrollWidth;
-    const itemWidth = carrusel.querySelector('img').offsetWidth;
+  // === CARRUSEL DE FOTOS ===
+  const carrusel = document.querySelector(".carrusel-fotos");
+  const prevBtn = document.querySelector(".carrusel-btn.prev");
+  const nextBtn = document.querySelector(".carrusel-btn.next");
+  let currentIndex = 0;
 
+  if (carrusel && prevBtn && nextBtn) {
+    // Calcula el número de fotos reales, asumiendo que no están duplicadas en el HTML
+    const totalItems = carrusel.querySelectorAll('img').length;
+    
+    // Función para actualizar la posición del carrusel
+    const updateCarrusel = () => {
+      const itemWidth = carrusel.querySelector('img').offsetWidth;
+      carrusel.scrollTo({
+        left: itemWidth * currentIndex,
+        behavior: "smooth"
+      });
+    };
+
+    // Lógica para el botón Siguiente
     nextBtn.addEventListener("click", () => {
-        scrollPosition += itemWidth;
-        if (scrollPosition >= scrollWidth) {
-            scrollPosition = 0;
-        }
-        carrusel.scrollTo({
-            left: scrollPosition,
-            behavior: "smooth"
-        });
+      currentIndex = (currentIndex + 1) % totalItems;
+      updateCarrusel();
     });
 
+    // Lógica para el botón Anterior
     prevBtn.addEventListener("click", () => {
-        scrollPosition -= itemWidth;
-        if (scrollPosition < 0) {
-            scrollPosition = scrollWidth - itemWidth;
-        }
-        carrusel.scrollTo({
-            left: scrollPosition,
-            behavior: "smooth"
-        });
+      currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+      updateCarrusel();
     });
-}
-
+  }
 });
