@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Javier & Linda - Nos Casamos</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600;700&family=Great+Vibes&display=swap"
+        rel="stylesheet"
+    />
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text x='0' y='14' font-size='16'>♥</text></svg>">
+</head>
+<body>
+    <main class="invitacion-container">
+        <section class="portada">
+            
+            <div class="portada-bg"></div>
+            <div class="portada-contenido">
+                <p class="cita">
+                    "Por tanto, lo que Dios ha unido, que no lo separe el hombre"
+                </p>
+                <h1>Javier <span class="ampersand">&</span> Linda</h1>
+                <div class="padres-container">
+                    <p class="con">Con la bendición de Dios y de nuestros padres</p>
+                    <div class="padres-nombres">
+                        <div class="padre-columna">
+                            <p>Alonso Lucío González Zelada</p>
+                            <p>Sandra Lucrecia Paredes Salazar</p>
+                        </div>
+                        <div class="divisor-vertical"></div>
+                        <div class="padre-columna">
+                            <p>José Rodolfo Zuleta Vásquez</p>
+                            <p>María Concepción Yuc Hernández</p>
+                        </div>
+                    </div>
+                </div>
+                <p class="fecha-boda">SÁBADO 16 DE AGOSTO</p>
+                <div class="contador-container">
+                    <div id="countdown" role="timer"></div>
+                </div>
+            </div>
+            <audio id="musicaFondo" src="public/audio.mp" preload="auto" loop></audio>
+        </section>
+
+        <section class="seccion detalles">
+            <p class="titulo-seccion">Detalles del Evento</p>
+            <div class="evento-info-container">
+                <div class="evento-card">
+                    <i class="fas fa-church icono-evento"></i>
+                    <h3>Misa</h3>
+                    <p><strong>Hora:</strong> 2:30 PM</p>
+                    <p>Parroquia Purísima Concepción</p>
+                    <p>Ciudad Vieja, Sacatepéquez</p>
+                    <a
+                        href=https://maps.app.goo.gl/rCsAmdSQognemdK48
+                        target="_blank"
+                        class="enlace-mapa"
+                    >
+                        <i class="fas fa-map-marker-alt"></i> Ver en Google Maps
+                    </a>
+                </div>
+                <div class="evento-card">
+                    <i class="fas fa-glass-cheers icono-evento"></i>
+                    <h3>Recepción y Baile</h3>
+                    <p><strong>Hora:</strong> 4:00 PM</p>
+                    <p>Jardín Rancho Guadalupe</p>
+                    <p>San Antonio Aguas Calientes</p>
+                    <a
+                        href=https://maps.app.goo.gl/nUZcURJuBZacF3c77
+                        target="_blank"
+                        class="enlace-mapa"
+                    >
+                        <i class="fas fa-map-marker-alt"></i> Ver en Google Maps
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="seccion galeria">
+          <p class="titulo-seccion">Nuestros Momentos</p>
+          <div class="carrusel-container" id="carrusel">
+             <div class="carrusel-fotos">
+            <img src="public/12.jpg" alt="Foto de la pareja 1" loading="lazy" />
+            <img src="public/16.jpg" alt="Foto de la pareja 2" loading="lazy" />
+            <img src="public/17.jpg" alt="Foto de la pareja 3" loading="lazy" />
+            <img src="public/18.jpg" alt="Foto de la pareja 4" loading="lazy" />
+            </div>
+            <button class="carrusel-btn prev"><i class="fas fa-chevron-left"></i></button>
+            <button class="carrusel-btn next"><i class="fas fa-chevron-right"></i></button>
+          </div>
+        </section>
+
+        <section class="seccion regalos">
+            <p class="titulo-seccion">El Mejor Regalo</p>
+            <div class="regalos-container">
+                <div class="regalo-icono">
+                    <i class="fa-solid fa-envelope-open-text"></i>
+                </div>
+                <div class="regalo-texto">
+                    <p>
+                        El mejor regalo que podemos recibir es su compañía en este día tan
+                        especial.
+                    </p>
+                    <p>
+                        Sin embargo, si desean obsequiarnos algo, agradecemos su aporte en
+                        efectivo, un pequeño aporte será recibido con gratitud.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <button
+        class="player"
+        id="playerBtn"
+        aria-label="Reproducir o pausar música de fondo"
+    >
+        <i class="fa-solid fa-music"></i>
+        <span id="playerLabel">Sonando…</span>
+    </button>
+
+    <div class="overlay-entrada" id="overlayEntrada">
+        <div class="panel">
+            <p>¡Nos Casamos!</p>
+            <p>Acompañanos a vivir este momento inolvidable</p>
+            <button class="btn-entrar" id="btnEntrar">
+                <i class=/i> Ver invitación
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js" defer></script>
+</body>
+</html>
